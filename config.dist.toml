@@ -1,0 +1,6 @@
+cookie_string = "" # view https://ytmusicapi.readthedocs.io/en/stable/setup.html
+download_path = "" # where to download music
+file_name = "%(uploader)s_%(title)s.%(ext)s" # Has to be Youtube DLP standard template https://github.com/yt-dlp/yt-dlp#output-template
+db_path = "blackout.db" # Where to write the database for caching
+create_artist_dir = true 
+create_album_dir = true

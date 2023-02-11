@@ -1,0 +1,11 @@
+config.toml
+
+blackout.db
+
+__pycache__
+venv
+
+.vscode
+.history
+
+headers_auth.json
