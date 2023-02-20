@@ -35,7 +35,7 @@ YT_DLP_OPTS = {
 }
 
 # Will probably switch to musicbrainz for proper tagging
-def add_metadata(input_file: str, thumbnail_url: str, album: str, artists: str, title: str, year: str, track_count: int):
+def add_metadata(input_file: str, thumbnail_url: str, album: str, artists: List[playlist.Artist], title: str, year: str, track_count: int):
     response = requests.get(thumbnail_url)
 
     audio = OggOpus(input_file)
@@ -54,20 +54,22 @@ def add_metadata(input_file: str, thumbnail_url: str, album: str, artists: str, 
 
     audio["TITLE"] = title
     
-
-    audio["ARTISTS"] = artists
+    artist_names = []
+    for artist in artists:
+        artist_names.append(artist.name)
+        
+    audio["ARTIST"] =  ";".join(artist_names)
     audio["ALBUM"] = album
     audio["DATE"] = year
     audio["TOTALTRACKS"] = str(track_count)
     audio["TRACKTOTAL"] = str(track_count)
     
-    audio.save()
-    
+    audio.save()    
     # File names are wreidly saved with Topic_ prefix at song titles. 
     clear_name = input_file.replace("Topic_", "")
     os.rename(input_file, clear_name)
     
-    db.write_track(conn, title, artists ,album, int(year),track_count, clear_name)
+    db.write_track(conn, title, ";".join(artist_names) ,album, int(year),track_count, clear_name)
     
     return clear_name
     
@@ -112,15 +114,15 @@ if __name__ == "__main__":
             
             album = ytm.get_album(track.album.id)
 
-            artist_names = []
-            for artist in track.artists:
-                artist_names.append(artist.name)
-            artist_names = ",".join(artist_names)
+        
             
             found = False
             for downloaded in downloaded_tracks:
                 if downloaded_tracks:
-                    if track.title == downloaded[1] and artist_names == downloaded[2] and track.album.name == downloaded[3]:
+                    artist_names = []
+                    for artist in track.artists:
+                            artist_names.append(artist.name)
+                    if track.title == downloaded[1] and ";".join(artist_names) == downloaded[2] and track.album.name == downloaded[3]:
                         found = True
                         
             if found:
@@ -166,7 +168,7 @@ if __name__ == "__main__":
                 output,
                 cover_art.url,
                 track.album.name,
-                artist_names,
+                track.artists,
                 track.title,
                 year,
                 album["trackCount"]

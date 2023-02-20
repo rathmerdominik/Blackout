@@ -33,6 +33,8 @@ chown -R $USER:$GROUP /opt/blackout
 cat << EOF > /etc/systemd/system/blackout.timer
 [Unit]
 Description=Scheduled blackout timer
+After=network.target
+Wants=network-online.target
 
 [Timer]
 OnCalendar=*:0/5
