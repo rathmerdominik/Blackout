@@ -1,23 +1,8 @@
+> [!WARNING] 
+> No longer maintained. I use Spotify by now.  
+> Music downloading is just not worth it anymore.
+
 # Blackout
-
-![Blackout](blackout.png "Blackout")  
-
-## Preamble
-
-Welcome to Germany.  
-A beautiful country with completely functioning internet that is one of the best on this planet...  
-
-You just believed me didn't you? Hah good one. Let me tell you something.
-
-We have **HORRIBLE** digital laws and digital infrastructure. We have TERRIBLE networking and absolutely overpriced data plans where neighboring countries are just laughing.
-
-I have a data plan of 5 GB from my company. And this one does not bring me through the month. The WWW and generally everything internet related has been "fucked" so much where every site comes up with 2 GB of CSS and JS and you cant browse a single website without being afraid that you run out of data.
-
-To stay sane i need music. And i literally can not access my music as soon as my mobile data is throttled. The throttling is so bad that sometimes even simple text messaging starts to become a challenge.
-
-## The Solution
-
-And here we have the solution when you sit in such a **Blackout**. You just download the music.
 
 This program written in python is the over-complex solution to my problem.
 
